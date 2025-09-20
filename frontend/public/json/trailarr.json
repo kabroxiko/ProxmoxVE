@@ -1,0 +1,41 @@
+{
+  "name": "Trailarr",
+  "slug": "trailarr",
+  "categories": [
+    14
+  ],
+  "date_created": "2025-09-20",
+  "type": "ct",
+  "updateable": true,
+  "privileged": false,
+  "interface_port": 7889,
+  "documentation": "https://nandyalu.github.io/trailarr",
+  "website": "https://github.com/nandyalu/trailarr",
+  "logo": "https://raw.githubusercontent.com/nandyalu/trailarr/main/assets/images/trailarr-full-light-512-lg.png",
+  "config_path": "/var/lib/trailarr/.env",
+  "description": "Trailarr is a Docker application to download and manage trailers for your Radarr and Sonarr libraries. It runs in the background like Radarr/Sonarr, checks if a trailer already exists for movies/series, downloads trailers and organizes them in the media folder, follows Plex naming conventions, and works with Plex, Emby, Jellyfin, etc. Features include customizable profiles, hardware acceleration support for AMD, Intel, and NVIDIA GPUs, beautiful responsive UI, and automatic trailer searching when not set in Radarr/Sonarr.",
+  "install_methods": [
+    {
+      "type": "default",
+      "script": "ct/trailarr.sh",
+      "resources": {
+        "cpu": 2,
+        "ram": 2048,
+        "hdd": 6,
+        "os": "debian",
+        "version": "12"
+      }
+    }
+  ],
+  "default_credentials": {
+    "username": null,
+    "password": null
+  },
+  "notes": [
+    "Default port is 7889",
+    "Configuration is done through the web interface",
+    "Supports hardware acceleration for GPU encoding",
+    "Integrates with Radarr and Sonarr for trailer management",
+    "Data is stored in /var/lib/trailarr/"
+  ]
+}
