@@ -5,8 +5,8 @@ import { basePath } from "@/config/site-config";
 export const dynamic = "force-static";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const domain = "community-scripts.github.io";
-  const protocol = "https";
+  const domain = "localhost:3000";
+  const protocol = "http";
   return [
     {
       url: `${protocol}://${domain}/${basePath}`,

@@ -52,7 +52,9 @@ function update_script() {
   msg_ok "Started Service"
   msg_ok "Updated successfully"
   exit
-}start
+}
+
+start
 build_container
 description
 
