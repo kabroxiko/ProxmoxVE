@@ -95,7 +95,7 @@ if [ -n "$FFMPEG_URL" ]; then
   $STD curl -L -o ffmpeg.tar.xz "$FFMPEG_URL"
   $STD mkdir -p ffmpeg_extract
   $STD tar -xf ffmpeg.tar.xz -C ffmpeg_extract --strip-components=1
-  $STD cp ffmpeg_extract/bin/* "/opt/trailarr/.local/bin/"
+  $STD cp ffmpeg_extract/ffmpeg ffmpeg_extract/ffprobe "/opt/trailarr/.local/bin/"
   $STD rm -rf ffmpeg.tar.xz ffmpeg_extract
 fi
 
