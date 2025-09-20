@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2025 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/kabroxiko/ProxmoxVE/raw/main/LICENSE
 
 YW=$(echo "\033[33m")
 BL=$(echo "\033[36m")
@@ -48,11 +48,11 @@ done
 clear
 function header_info() {
   echo -e "${BL}
-   _____                      _  _____           
-  / ____|                    | |/ ____|          
- | |     _ __ _____      ____| | (___   ___  ___ 
+   _____                      _  _____
+  / ____|                    | |/ ____|
+ | |     _ __ _____      ____| | (___   ___  ___
  | |    |  __/ _ \ \ /\ / / _  |\___ \ / _ \/ __|
- | |____| | | (_) \ V  V / (_| |____) |  __/ (__ 
+ | |____| | | (_) \ V  V / (_| |____) |  __/ (__
   \_____|_|  \___/ \_/\_/ \__ _|_____/ \___|\___|
 ${CL}"
 }

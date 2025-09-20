@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 community-scripts ORG
+# Copyright (c) 2021-2025 kabroxiko ORG
 # Author: Nícolas Pastorello (opastorello)
-# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/kabroxiko/ProxmoxVE/raw/main/LICENSE
 # Source: https://privatebin.info/
 
 source /dev/stdin <<<"$FUNCTIONS_FILE_PATH"
@@ -54,10 +54,10 @@ server {
 server {
     listen 443 ssl default_server;
     listen [::]:443 ssl default_server;
-    
+
     ssl_certificate /etc/ssl/privatebin/cert.pem;
     ssl_certificate_key /etc/ssl/privatebin/key.pem;
-    
+
     root /opt/privatebin;
     index index.php;
 

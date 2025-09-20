@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 community-scripts ORG
+# Copyright (c) 2021-2025 kabroxiko ORG
 # Author: MickLesk (Canbiz)
-# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/kabroxiko/ProxmoxVE/raw/main/LICENSE
 # Source: https://github.com/BookStackApp/BookStack
 
 source /dev/stdin <<<"$FUNCTIONS_FILE_PATH"
@@ -92,7 +92,7 @@ cat <<EOF >/etc/apache2/sites-available/bookstack.conf
           RewriteRule ^ index.php [L]
       </IfModule>
   </Directory>
-  
+
     ErrorLog /var/log/apache2/error.log
     CustomLog /var/log/apache2/access.log combined
 

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 community-scripts
+# Copyright (c) 2021-2025 kabroxiko
 # Author: CrazyWolf13
-# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/kabroxiko/ProxmoxVE/raw/main/LICENSE
 # Source: https://docs.craftycontrol.com/pages/getting-started/installation/linux/
 
 source /dev/stdin <<<"$FUNCTIONS_FILE_PATH"

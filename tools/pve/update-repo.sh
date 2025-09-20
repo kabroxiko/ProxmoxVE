@@ -3,17 +3,17 @@
 # Copyright (c) 2021-2025 tteck
 # Author: MickLesk
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/kabroxiko/ProxmoxVE/raw/main/LICENSE
 
 function header_info {
   clear
   cat <<"EOF"
-   __  __          __      __          ____                 
-  / / / /___  ____/ /___ _/ /____     / __ \___  ____  ____ 
+   __  __          __      __          ____
+  / / / /___  ____/ /___ _/ /____     / __ \___  ____  ____
  / / / / __ \/ __  / __ `/ __/ _ \   / /_/ / _ \/ __ \/ __ \
 / /_/ / /_/ / /_/ / /_/ / /_/  __/  / _, _/  __/ /_/ / /_/ /
-\____/ .___/\__,_/\__,_/\__/\___/  /_/ |_|\___/ .___/\____/ 
-    /_/                                      /_/            
+\____/ .___/\__,_/\__,_/\__/\___/  /_/ |_|\___/ .___/\____/
+    /_/                                      /_/
 EOF
 }
 
@@ -35,14 +35,14 @@ function update_container() {
     echo -e "${BL}[Info]${GN} Checking /usr/bin/update in ${BL}$container${CL} (OS: ${GN}$os${CL})"
 
     if pct exec "$container" -- [ -e /usr/bin/update ]; then
-      if pct exec "$container" -- grep -q "community-scripts/ProxmoxVE" /usr/bin/update; then
+      if pct exec "$container" -- grep -q "kabroxiko/ProxmoxVE" /usr/bin/update; then
         echo -e "${RD}[No Change]${CL} /usr/bin/update is already up to date in ${BL}$container${CL}.\n"
       elif pct exec "$container" -- grep -q -v "tteck" /usr/bin/update; then
         echo -e "${RD}[Warning]${CL} /usr/bin/update in ${BL}$container${CL} contains a different entry (${RD}tteck${CL}). No changes made.\n"
       else
-        pct exec "$container" -- bash -c "sed -i 's/tteck\\/Proxmox/community-scripts\\/ProxmoxVE/g' /usr/bin/update"
+        pct exec "$container" -- bash -c "sed -i 's/tteck\\/Proxmox/kabroxiko\\/ProxmoxVE/g' /usr/bin/update"
 
-        if pct exec "$container" -- grep -q "community-scripts/ProxmoxVE" /usr/bin/update; then
+        if pct exec "$container" -- grep -q "kabroxiko/ProxmoxVE" /usr/bin/update; then
           echo -e "${GN}[Success]${CL} /usr/bin/update updated in ${BL}$container${CL}.\n"
         else
           echo -e "${RD}[Error]${CL} /usr/bin/update in ${BL}$container${CL} could not be updated properly.\n"
@@ -62,4 +62,4 @@ for container in $(pct list | awk '{if(NR>1) print $1}'); do
 done
 
 header_info
-echo -e "${GN}The process is complete. The repositories have been switched to community-scripts/ProxmoxVE.${CL}\n"
+echo -e "${GN}The process is complete. The repositories have been switched to kabroxiko/ProxmoxVE.${CL}\n"

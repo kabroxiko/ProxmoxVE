@@ -2,7 +2,7 @@
 
 # Copyright (c) 2021-2025 tteck
 # Author: tteck (tteckster)
-# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/kabroxiko/ProxmoxVE/raw/main/LICENSE
 # Source: https://oss.oetiker.ch/smokeping/
 
 source /dev/stdin <<<"$FUNCTIONS_FILE_PATH"
@@ -37,8 +37,8 @@ host = 8.8.8.8
 ++ Cloudflare
 title = Cloudflare
 host = 1.1.1.1
-++ Quad9  
-title = Quad9 
+++ Quad9
+title = Quad9
 host = 9.9.9.9
 ++ OpenDNS
 title = OpenDNS

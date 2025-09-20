@@ -3,17 +3,17 @@
 # Copyright (c) 2021-2025 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/kabroxiko/ProxmoxVE/raw/main/LICENSE
 
-source /dev/stdin <<<$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/api.func)
+source /dev/stdin <<<$(curl -fsSL https://raw.githubusercontent.com/kabroxiko/ProxmoxVE/main/misc/api.func)
 
 function header_info {
   clear
   cat <<"EOF"
  ______              __ __           _  __        __      __             __  _   ____  ___
 /_  __/_ _________  / //_/__ __ __  / |/ /____ __/ /_____/ /__  __ _____/ / | | / /  |/  /
- / / / // / __/ _ \/ ,< / -_) // / /    / -_) \ / __/ __/ / _ \/ // / _  /  | |/ / /|_/ / 
-/_/  \_,_/_/ /_//_/_/|_|\__/\_, / /_/|_/\__/_\_\\__/\__/_/\___/\_,_/\_,_/   |___/_/  /_/  
+ / / / // / __/ _ \/ ,< / -_) // / /    / -_) \ / __/ __/ / _ \/ // / _  /  | |/ / /|_/ /
+/_/  \_,_/_/ /_//_/_/|_|\__/\_, / /_/|_/\__/_\_\\__/\__/_/\___/\_,_/\_,_/   |___/_/  /_/
                            /___/
 EOF
 }
@@ -509,7 +509,7 @@ DESCRIPTION=$(
   cat <<EOF
 <div align='center'>
   <a href='https://Helper-Scripts.com' target='_blank' rel='noopener noreferrer'>
-    <img src='https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>
+    <img src='https://raw.githubusercontent.com/kabroxiko/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>
   </a>
 
   <h2 style='font-size: 24px; margin: 20px 0;'>Nextcloud VM</h2>
@@ -519,18 +519,18 @@ DESCRIPTION=$(
       <img src='https://img.shields.io/badge/&#x2615;-Buy us a coffee-blue' alt='spend Coffee' />
     </a>
   </p>
-  
+
   <span style='margin: 0 10px;'>
     <i class="fa fa-github fa-fw" style="color: #f5f5f5;"></i>
-    <a href='https://github.com/community-scripts/ProxmoxVE' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>GitHub</a>
+    <a href='https://github.com/kabroxiko/ProxmoxVE' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>GitHub</a>
   </span>
   <span style='margin: 0 10px;'>
     <i class="fa fa-comments fa-fw" style="color: #f5f5f5;"></i>
-    <a href='https://github.com/community-scripts/ProxmoxVE/discussions' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Discussions</a>
+    <a href='https://github.com/kabroxiko/ProxmoxVE/discussions' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Discussions</a>
   </span>
   <span style='margin: 0 10px;'>
     <i class="fa fa-exclamation-circle fa-fw" style="color: #f5f5f5;"></i>
-    <a href='https://github.com/community-scripts/ProxmoxVE/issues' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Issues</a>
+    <a href='https://github.com/kabroxiko/ProxmoxVE/issues' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Issues</a>
   </span>
 </div>
 EOF

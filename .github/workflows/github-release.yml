@@ -2,12 +2,12 @@ name: Create Daily Release
 
 on:
   schedule:
-    - cron: '1 0 * * *'  # Runs daily at 00:01 UTC
+    - cron: "1 0 * * *" # Runs daily at 00:01 UTC
   workflow_dispatch:
-  
+
 jobs:
   create-daily-release:
-    if: github.repository == 'community-scripts/ProxmoxVE'
+    if: github.repository == 'kabroxiko/ProxmoxVE'
     runs-on: ubuntu-latest
     permissions:
       contents: write

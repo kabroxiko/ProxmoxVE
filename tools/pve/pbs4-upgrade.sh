@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 community-scripts ORG
+# Copyright (c) 2021-2025 kabroxiko ORG
 # Author: MickLesk (CanbiZ)
-# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/kabroxiko/ProxmoxVE/raw/main/LICENSE
 
 header_info() {
   clear
   cat <<"EOF"
-    ____  ____ _____ __ __     __  __                           __   
-   / __ \/ __ ) ___// // /    / / / /___  ____ __________ _____/ /__ 
+    ____  ____ _____ __ __     __  __                           __
+   / __ \/ __ ) ___// // /    / / / /___  ____ __________ _____/ /__
   / /_/ / __  \__ \/ // /_   / / / / __ \/ __ `/ ___/ __ `/ __  / _ \
  / ____/ /_/ /__/ /__  __/  / /_/ / /_/ / /_/ / /  / /_/ / /_/ /  __/
-/_/   /_____/____/  /_/     \____/ .___/\__, /_/   \__,_/\__,_/\___/ 
-                                /_/    /____/                        
+/_/   /_____/____/  /_/     \____/ .___/\__, /_/   \__,_/\__,_/\___/
+                                /_/    /____/
 EOF
 }
 

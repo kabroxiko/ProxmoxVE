@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 community-scripts ORG
+# Copyright (c) 2021-2025 kabroxiko ORG
 # Author: MickLesk
-# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/kabroxiko/ProxmoxVE/raw/main/LICENSE
 # Source: https://www.kimai.org/
 
 source /dev/stdin <<<"$FUNCTIONS_FILE_PATH"
@@ -107,7 +107,7 @@ cat <<EOF >/etc/apache2/sites-available/kimai.conf
         AllowOverride All
         Require all granted
     </Directory>
-  
+
     ErrorLog /var/log/apache2/error.log
     CustomLog /var/log/apache2/access.log combined
 

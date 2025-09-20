@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 community-scripts ORG
+# Copyright (c) 2021-2025 kabroxiko ORG
 # Author: Nícolas Pastorello (opastorello)
-# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/kabroxiko/ProxmoxVE/raw/main/LICENSE
 # Source: https://www.paymenter.org
 
 source /dev/stdin <<<"$FUNCTIONS_FILE_PATH"
@@ -119,4 +119,3 @@ msg_info "Cleaning up"
 $STD apt-get -y autoremove
 $STD apt-get -y autoclean
 msg_ok "Cleaned"
-

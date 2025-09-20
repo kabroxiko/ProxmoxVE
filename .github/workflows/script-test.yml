@@ -11,7 +11,7 @@ on:
 
 jobs:
   run-install-script:
-    if: github.repository == 'community-scripts/ProxmoxVE'
+    if: github.repository == 'kabroxiko/ProxmoxVE'
     runs-on: pvenode
     steps:
       - name: Checkout PR branch
@@ -44,9 +44,9 @@ jobs:
         id: check-install-script
         run: |
           ALL_FILES=()
-          ADDED_FILES=()  
-          for FILE in ${{ env.SCRIPT }}; do           
-            if [[ $FILE =~ ^install/.*-install\.sh$ ]] || [[ $FILE =~ ^ct/.*\.sh$ ]]; then             
+          ADDED_FILES=()
+          for FILE in ${{ env.SCRIPT }}; do
+            if [[ $FILE =~ ^install/.*-install\.sh$ ]] || [[ $FILE =~ ^ct/.*\.sh$ ]]; then
               STRIPPED_NAME=$(basename "$FILE" | sed 's/-install//' | sed 's/\.sh$//')
               if [[ ! " ${ADDED_FILES[@]} " =~ " $STRIPPED_NAME " ]]; then
                 ALL_FILES+=("$FILE")
@@ -62,9 +62,9 @@ jobs:
         id: run-install
         continue-on-error: true
         run: |
-          set +e  
+          set +e
           #run for each files in /ct
-          for FILE in ${{ env.ALL_FILES }}; do            
+          for FILE in ${{ env.ALL_FILES }}; do
             STRIPPED_NAME=$(basename "$FILE" | sed 's/-install//' | sed 's/\.sh$//')
             echo "Running Test for: $STRIPPED_NAME"
             if grep -E -q 'read\s+-r\s+-p\s+".*"\s+\w+' "$FILE"; then
@@ -93,7 +93,7 @@ jobs:
                 ERROR_MSG="No install script found for $FILE"
                 echo "$ERROR_MSG" > result_$STRIPPED_NAME.log
                 continue
-              fi                
+              fi
                 echo "Found install script for $STRIPPED_NAME"
                 chmod +x "$INSTALL_SCRIPT"
                 RUNNING_FILE=$FILE
@@ -102,22 +102,22 @@ jobs:
                   continue
                 fi
             fi
-            git remote add community-scripts https://github.com/community-scripts/ProxmoxVE.git
-            git fetch community-scripts
+            git remote add kabroxiko https://github.com/kabroxiko/ProxmoxVE.git
+            git fetch kabroxiko
             rm -f .github/workflows/scripts/app-test/pr-build.func || true
             rm -f .github/workflows/scripts/app-test/pr-install.func || true
             rm -f .github/workflows/scripts/app-test/pr-alpine-install.func || true
             rm -f .github/workflows/scripts/app-test/pr-create-lxc.sh || true
-            git checkout community-scripts/main -- .github/workflows/scripts/app-test/pr-build.func
-            git checkout community-scripts/main -- .github/workflows/scripts/app-test/pr-install.func
-            git checkout community-scripts/main -- .github/workflows/scripts/app-test/pr-alpine-install.func
-            git checkout community-scripts/main -- .github/workflows/scripts/app-test/pr-create-lxc.sh
-            chmod +x $RUNNING_FILE         
+            git checkout kabroxiko/main -- .github/workflows/scripts/app-test/pr-build.func
+            git checkout kabroxiko/main -- .github/workflows/scripts/app-test/pr-install.func
+            git checkout kabroxiko/main -- .github/workflows/scripts/app-test/pr-alpine-install.func
+            git checkout kabroxiko/main -- .github/workflows/scripts/app-test/pr-create-lxc.sh
+            chmod +x $RUNNING_FILE
             chmod +x .github/workflows/scripts/app-test/pr-create-lxc.sh
             chmod +x .github/workflows/scripts/app-test/pr-install.func
             chmod +x .github/workflows/scripts/app-test/pr-alpine-install.func
             chmod +x .github/workflows/scripts/app-test/pr-build.func
-            sed -i 's|source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/build.func)|source .github/workflows/scripts/app-test/pr-build.func|g' "$RUNNING_FILE"
+            sed -i 's|source <(curl -fsSL https://raw.githubusercontent.com/kabroxiko/ProxmoxVE/main/misc/build.func)|source .github/workflows/scripts/app-test/pr-build.func|g' "$RUNNING_FILE"
             echo "Executing $RUNNING_FILE"
             ERROR_MSG=$(./$RUNNING_FILE 2>&1 > /dev/null)
             echo "Finished running $FILE"
@@ -137,7 +137,7 @@ jobs:
             if [[ $status == "running" ]]; then
                 pct stop $container_id
                 pct destroy $container_id
-            fi            
+            fi
           done
 
       - name: Post error comments

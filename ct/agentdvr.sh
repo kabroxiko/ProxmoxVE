@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/build.func)
+source <(curl -fsSL https://raw.githubusercontent.com/kabroxiko/ProxmoxVE/main/misc/build.func)
 # Copyright (c) 2021-2025 tteck
 # Author: tteck (tteckster)
-# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/kabroxiko/ProxmoxVE/raw/main/LICENSE
 # Source: https://www.ispyconnect.com/
 
 APP="AgentDVR"
@@ -27,7 +27,7 @@ function update_script() {
     msg_error "No ${APP} Installation Found!"
     exit
   fi
-  
+
   RELEASE=$(curl -fsSL "https://www.ispyconnect.com/api/Agent/DownloadLocation4?platform=Linux64&fromVersion=0" | grep -o 'https://.*\.zip')
   if [[ "${RELEASE}" != "$(cat ~/.agentdvr 2>/dev/null)" ]] || [[ ! -f ~/.agentdvr ]]; then
     msg_info "Stopping service"

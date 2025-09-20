@@ -2,7 +2,7 @@
 
 # Copyright (c) 2021-2025 tteck
 # Author: tteck (tteckster) | Co-Author Slaviša Arežina (tremor021)
-# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/kabroxiko/ProxmoxVE/raw/main/LICENSE
 # Source: https://magicmirror.builders/
 
 source /dev/stdin <<<"$FUNCTIONS_FILE_PATH"
@@ -22,16 +22,16 @@ sed -i -E 's/("postinstall": )".*"/\1""/; s/("prepare": )".*"/\1""/' package.jso
 $STD npm run install-mm
 cat <<EOF >/opt/magicmirror/config/config.js
 let config = {
-        address: "0.0.0.0",     
+        address: "0.0.0.0",
         port: 8080,
-        basePath: "/",  
-        ipWhitelist: [],        
-        useHttps: false,              
-        httpsPrivateKey: "",    
-        httpsCertificate: "",   
+        basePath: "/",
+        ipWhitelist: [],
+        useHttps: false,
+        httpsPrivateKey: "",
+        httpsCertificate: "",
         language: "en",
         locale: "en-US",
-        logLevel: ["INFO", "LOG", "WARN", "ERROR"], 
+        logLevel: ["INFO", "LOG", "WARN", "ERROR"],
         timeFormat: 24,
         units: "metric",
         serverOnly:  true,

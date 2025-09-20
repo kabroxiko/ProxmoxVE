@@ -3,16 +3,16 @@
 # Copyright (c) 2021-2025 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/kabroxiko/ProxmoxVE/raw/main/LICENSE
 
 function header_info {
   cat <<"EOF"
-   ______          __        _____                          
+   ______          __        _____
   / ____/___  ____/ /__     / ___/___  ______   _____  _____
  / /   / __ \/ __  / _ \    \__ \/ _ \/ ___/ | / / _ \/ ___/
-/ /___/ /_/ / /_/ /  __/   ___/ /  __/ /   | |/ /  __/ /    
-\____/\____/\__,_/\___/   /____/\___/_/    |___/\___/_/     
- 
+/ /___/ /_/ / /_/ /  __/   ___/ /  __/ /   | |/ /  __/ /
+\____/\____/\__,_/\___/   /____/\___/_/    |___/\___/_/
+
 EOF
 }
 IP=$(hostname -I | awk '{print $1}')
@@ -92,7 +92,7 @@ systemctl enable -q --now code-server@"$USER"
 cat <<EOF >~/.config/code-server/config.yaml
 bind-addr: 0.0.0.0:8680
 auth: none
-password: 
+password:
 cert: false
 EOF
 systemctl restart code-server@"$USER"

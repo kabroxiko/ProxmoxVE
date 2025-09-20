@@ -11,7 +11,7 @@
 
 
 # Set default reviewers
-*                                                                           @community-scripts/Contributor
+*                                                                           @kabroxiko/Contributor
 
 # All changes in frontend
-/frontend/                                                                  @community-scripts/Frontend-Dev
+/frontend/                                                                  @kabroxiko/Frontend-Dev

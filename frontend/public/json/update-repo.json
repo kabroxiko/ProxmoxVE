@@ -13,7 +13,7 @@
   "website": null,
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/linuxcontainers.webp",
   "config_path": "",
-  "description": "This script updates repository links in LXC containers, replacing old links from the tteck repository with links to the new community-scripts repository to fix issues related to updating scripts.",
+  "description": "This script updates repository links in LXC containers, replacing old links from the tteck repository with links to the new kabroxiko repository to fix issues related to updating scripts.",
   "install_methods": [
     {
       "type": "default",

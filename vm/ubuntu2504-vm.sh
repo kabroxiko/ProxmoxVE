@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 community-scripts ORG
+# Copyright (c) 2021-2025 kabroxiko ORG
 # Author: MickLesk (CanbiZ)
-# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/kabroxiko/ProxmoxVE/raw/main/LICENSE
 
-source /dev/stdin <<<$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/api.func)
+source /dev/stdin <<<$(curl -fsSL https://raw.githubusercontent.com/kabroxiko/ProxmoxVE/main/misc/api.func)
 
 function header_info {
   clear
   cat <<"EOF"
    __  ____                __           ___   ______ ____  __ __     _    ____  ___
   / / / / /_  __  ______  / /___  __   |__ \ / ____// __ \/ // /    | |  / /  |/  /
- / / / / __ \/ / / / __ \/ __/ / / /   __/ //___ \ / / / / // /_    | | / / /|_/ / 
-/ /_/ / /_/ / /_/ / / / / /_/ /_/ /   / __/____/ // /_/ /__  __/    | |/ / /  / /  
+ / / / / __ \/ / / / __ \/ __/ / / /   __/ //___ \ / / / / // /_    | | / / /|_/ /
+/ /_/ / /_/ / /_/ / / / / /_/ /_/ /   / __/____/ // /_/ /__  __/    | |/ / /  / /
 \____/_.___/\__,_/_/ /_/\__/\__,_/   /____/_____(_)____/  /_/       |___/_/  /_/ (Plucky Puffin)
-                                                                                   
+
 EOF
 }
 header_info
@@ -505,7 +505,7 @@ DESCRIPTION=$(
   cat <<EOF
 <div align='center'>
   <a href='https://Helper-Scripts.com' target='_blank' rel='noopener noreferrer'>
-    <img src='https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>
+    <img src='https://raw.githubusercontent.com/kabroxiko/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>
   </a>
 
   <h2 style='font-size: 24px; margin: 20px 0;'>ubuntu VM</h2>
@@ -515,18 +515,18 @@ DESCRIPTION=$(
       <img src='https://img.shields.io/badge/&#x2615;-Buy us a coffee-blue' alt='spend Coffee' />
     </a>
   </p>
-  
+
   <span style='margin: 0 10px;'>
     <i class="fa fa-github fa-fw" style="color: #f5f5f5;"></i>
-    <a href='https://github.com/community-scripts/ProxmoxVE' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>GitHub</a>
+    <a href='https://github.com/kabroxiko/ProxmoxVE' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>GitHub</a>
   </span>
   <span style='margin: 0 10px;'>
     <i class="fa fa-comments fa-fw" style="color: #f5f5f5;"></i>
-    <a href='https://github.com/community-scripts/ProxmoxVE/discussions' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Discussions</a>
+    <a href='https://github.com/kabroxiko/ProxmoxVE/discussions' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Discussions</a>
   </span>
   <span style='margin: 0 10px;'>
     <i class="fa fa-exclamation-circle fa-fw" style="color: #f5f5f5;"></i>
-    <a href='https://github.com/community-scripts/ProxmoxVE/issues' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Issues</a>
+    <a href='https://github.com/kabroxiko/ProxmoxVE/issues' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Issues</a>
   </span>
 </div>
 EOF
@@ -549,4 +549,4 @@ fi
 post_update_to_api "done" "none"
 msg_ok "Completed Successfully!\n"
 echo -e "Setup Cloud-Init before starting \n
-More info at https://github.com/community-scripts/ProxmoxVE/discussions/272 \n"
+More info at https://github.com/kabroxiko/ProxmoxVE/discussions/272 \n"

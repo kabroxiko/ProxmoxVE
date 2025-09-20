@@ -2,7 +2,7 @@
 
 # Copyright (c) 2025 Community Scripts ORG
 # Author: CrazyWolf13
-# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/kabroxiko/ProxmoxVE/raw/main/LICENSE
 # Source: https://tracktor.bytedge.in
 
 source /dev/stdin <<<"$FUNCTIONS_FILE_PATH"
@@ -28,8 +28,8 @@ PUBLIC_DEMO_MODE=false
 DB_PATH=/opt/tracktor-data/tracktor.db
 # Replace this URL if using behind reverse proxy for https traffic. Though it is optional and should work without changing
 PUBLIC_API_BASE_URL=http://$HOST_IP:3000
-# Here add the reverse proxy url as well to avoid cross errors from the app. 
-CORS_ORIGINS=http://$HOST_IP:3000 
+# Here add the reverse proxy url as well to avoid cross errors from the app.
+CORS_ORIGINS=http://$HOST_IP:3000
 PORT=3000
 EOF
 msg_ok "Configured Tracktor"

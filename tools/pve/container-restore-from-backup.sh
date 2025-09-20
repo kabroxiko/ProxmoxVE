@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2025 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/kabroxiko/ProxmoxVE/raw/main/LICENSE
 
 clear
 if command -v pveversion >/dev/null 2>&1; then
@@ -33,12 +33,12 @@ done
 clear
 function header_info {
     cat <<"EOF"
-    __  __                        ___              _      __              __              
-   / / / /___  ____ ___  ___     /   |  __________(_)____/ /_____ _____  / /_   
-  / /_/ / __ \/ __ `__ \/ _ \   / /| | / ___/ ___/ / ___/ __/ __ `/ __ \/ __/  
- / __  / /_/ / / / / / /  __/  / ___ |(__  |__  ) (__  ) /_/ /_/ / / / / /_   
-/_/ /_/\____/_/ /_/ /_/\___/  /_/  |_/____/____/_/____/\__/\__,_/_/ /_/\__/   
-                        RESTORE FROM BACKUP                                
+    __  __                        ___              _      __              __
+   / / / /___  ____ ___  ___     /   |  __________(_)____/ /_____ _____  / /_
+  / /_/ / __ \/ __ `__ \/ _ \   / /| | / ___/ ___/ / ___/ __/ __ `/ __ \/ __/
+ / __  / /_/ / / / / / /  __/  / ___ |(__  |__  ) (__  ) /_/ /_/ / / / / /_
+/_/ /_/\____/_/ /_/ /_/\___/  /_/  |_/____/____/_/____/\__/\__,_/_/ /_/\__/
+                        RESTORE FROM BACKUP
 EOF
 }
 

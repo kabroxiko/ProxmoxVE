@@ -3,15 +3,15 @@ name: Build and Publish Docker Image
 on:
   push:
     branches:
-      - main 
+      - main
     paths:
-      - '.github/runner/docker/**' 
+      - ".github/runner/docker/**"
   schedule:
-    - cron: '0 0 * * *'  
+    - cron: "0 0 * * *"
 
 jobs:
   build:
-    if: github.repository == 'community-scripts/ProxmoxVE'
+    if: github.repository == 'kabroxiko/ProxmoxVE'
     runs-on: ubuntu-latest #To ensure it always builds we use the github runner with all the right tooling
 
     steps:
@@ -30,7 +30,7 @@ jobs:
           repo_name=${{ github.repository }}  # Get repository name
           repo_name_lower=$(echo $repo_name | tr '[:upper:]' '[:lower:]')  # Convert to lowercase
           docker build -t ghcr.io/$repo_name_lower/gh-runner-self:latest -f .github/runner/docker/gh-runner-self.dockerfile .
-  
+
       - name: Push Docker image to GHCR
         run: |
           repo_name=${{ github.repository }}  # Get repository name

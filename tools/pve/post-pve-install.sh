@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2025 tteck
 # Author: tteckster | MickLesk (CanbiZ)
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/kabroxiko/ProxmoxVE/raw/main/LICENSE
 
 header_info() {
   clear
@@ -557,7 +557,7 @@ fi
 EOF
 
     chmod 755 /usr/local/bin/pve-remove-nag.sh
-    
+
     cat >/etc/apt/apt.conf.d/no-nag-script <<'EOF'
 DPkg::Post-Invoke { "/usr/local/bin/pve-remove-nag.sh"; };
 EOF

@@ -7,7 +7,7 @@ on:
 
 jobs:
   update-changelog-pull-request:
-    if: github.repository == 'community-scripts/ProxmoxVE'
+    if: github.repository == 'kabroxiko/ProxmoxVE'
     runs-on: ubuntu-latest
     env:
       CONFIG_PATH: .github/changelog-pr-config.json
@@ -216,17 +216,17 @@ jobs:
               if (hasSubcategories) {
                 for (const { title: subTitle, notes: subNotes } of subCategories) {
                   if (subNotes && subNotes.length > 0) {
-                    newReleaseNotes += `  - #### ${subTitle}\n\n`; 
-                    newReleaseNotes += `    ${subNotes.join("\n    ")}\n\n`; 
+                    newReleaseNotes += `  - #### ${subTitle}\n\n`;
+                    newReleaseNotes += `    ${subNotes.join("\n    ")}\n\n`;
                   }
                 }
               }
-            }        
+            }
             const changelogContent = await fs.readFile(changelogPath, 'utf-8');
             const changelogIncludesTodaysReleaseNotes = changelogContent.includes(`\n## ${today}`);
 
-            const regex = changelogIncludesTodaysReleaseNotes 
-              ? new RegExp(`## ${today}.*(?=## ${latestDateInChangelog})`, "gs") 
+            const regex = changelogIncludesTodaysReleaseNotes
+              ? new RegExp(`## ${today}.*(?=## ${latestDateInChangelog})`, "gs")
               : new RegExp(`(?=## ${latestDateInChangelog})`, "gs");
 
             const newChangelogContent = changelogContent.replace(regex, newReleaseNotes);

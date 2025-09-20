@@ -2,7 +2,7 @@
 
 # Copyright (c) 2021-2025 tteck
 # Author: tteck (tteckster)
-# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/kabroxiko/ProxmoxVE/raw/main/LICENSE
 # Source: https://forgejo.org/
 
 source /dev/stdin <<<"$FUNCTIONS_FILE_PATH"
@@ -47,7 +47,7 @@ RestartSec=2s
 Type=simple
 User=git
 Group=git
-WorkingDirectory=/var/lib/forgejo/ 
+WorkingDirectory=/var/lib/forgejo/
 ExecStart=/usr/local/bin/forgejo web --config /etc/forgejo/app.ini
 Restart=always
 Environment=USER=git HOME=/home/git GITEA_WORK_DIR=/var/lib/forgejo

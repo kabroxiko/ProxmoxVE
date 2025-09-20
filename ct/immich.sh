@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/build.func)
-# Copyright (c) 2021-2025 community-scripts ORG
+source <(curl -fsSL https://raw.githubusercontent.com/kabroxiko/ProxmoxVE/main/misc/build.func)
+# Copyright (c) 2021-2025 kabroxiko ORG
 # Author: vhsdream
-# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/kabroxiko/ProxmoxVE/raw/main/LICENSE
 # Source: https://immich.app
 
 APP="immich"
@@ -30,8 +30,8 @@ function update_script() {
   if [[ -f /etc/apt/sources.list.d/immich.list ]]; then
     msg_error "Wrong Debian version detected!"
     msg_error "You must upgrade your LXC to Debian Trixie before updating."
-    msg_error "Please visit https://github.com/community-scripts/ProxmoxVE/discussions/7726 for details."
-    echo "${TAB3}  If you have upgraded your LXC to Trixie and you still see this message, please open an Issue in the Community-Scripts repo."
+    msg_error "Please visit https://github.com/kabroxiko/ProxmoxVE/discussions/7726 for details."
+    echo "${TAB3}  If you have upgraded your LXC to Trixie and you still see this message, please open an Issue in the kabroxiko repo."
     exit
   fi
 

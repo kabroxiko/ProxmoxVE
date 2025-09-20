@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 community-scripts ORG
+# Copyright (c) 2021-2025 kabroxiko ORG
 # Author: MickLesk (Canbiz) && Desert_Gamer
 # License: MIT
 
@@ -57,7 +57,7 @@ spinner() {
   local frames=('⠋' '⠙' '⠹' '⠸' '⠼' '⠴' '⠦' '⠧' '⠇' '⠏')
   local spin_i=0
   local interval=0.1
-  
+
   trap 'exit 0' TERM INT
   printf "\e[?25l" 2>/dev/null
 
@@ -179,7 +179,7 @@ EOF
   systemctl daemon-reload &>/dev/null
   systemctl enable -q --now iptag.service &>/dev/null
   msg_ok "Updated IP-Tag Scripts"
-  
+
   # Show configuration information after update
   show_post_install_info
 }
@@ -187,7 +187,7 @@ EOF
 # Install only command without service
 install_command_only() {
   msg_info "Installing IP-Tag Command Only"
-  
+
   # Create directory if it doesn't exist
   if [[ ! -d "/opt/iptag" ]]; then
     mkdir -p /opt/iptag
@@ -240,7 +240,7 @@ exec "$SCRIPT_FILE"
 EOF
   chmod +x /usr/local/bin/iptag-run
   msg_ok "Created iptag-run command"
-  
+
   msg_ok "IP-Tag Command installed successfully! Use 'iptag-run' to run manually."
 }
 
@@ -248,14 +248,14 @@ EOF
 show_post_install_info() {
   stop_spinner
   echo -e "\n${YW}=== Next Steps ===${CL}"
-  
+
   # Show usage information
   if command -v iptag-run >/dev/null 2>&1; then
     echo -e "${YW}Run IP tagging manually: ${GN}iptag-run${CL}"
     echo -e "${YW}Add to cron for scheduled execution if needed${CL}"
     echo -e ""
   fi
-  
+
   echo -e "${RD}IMPORTANT: Configure your network subnets!${CL}"
   echo -e ""
   echo -e "${YW}Configuration file: ${GN}/opt/iptag/iptag.conf${CL}"
@@ -274,13 +274,13 @@ show_post_install_info() {
 # Interactive configuration setup for command-only (TAG_FORMAT only)
 interactive_config_setup_command() {
   echo -e "\n${YW}=== Configuration Setup ===${CL}"
-  
+
   # TAG_FORMAT configuration
   echo -e "\n${YW}Select tag format:${CL}"
   echo -e "${GN}1)${CL} last_two_octets - Show last two octets (e.g., 0.100) [Default]"
   echo -e "${GN}2)${CL} last_octet - Show only last octet (e.g., 100)"
   echo -e "${GN}3)${CL} full - Show full IP address (e.g., 192.168.0.100)"
-  
+
   while true; do
     read -p "Enter your choice (1-3) [1]: " tag_choice
     case ${tag_choice:-1} in
@@ -304,7 +304,7 @@ interactive_config_setup_command() {
         ;;
     esac
   done
-  
+
   # Set default LOOP_INTERVAL for command mode
   LOOP_INTERVAL=300
 }
@@ -312,13 +312,13 @@ interactive_config_setup_command() {
 # Interactive configuration setup for service (TAG_FORMAT + LOOP_INTERVAL)
 interactive_config_setup() {
   echo -e "\n${YW}=== Configuration Setup ===${CL}"
-  
+
   # TAG_FORMAT configuration
   echo -e "\n${YW}Select tag format:${CL}"
   echo -e "${GN}1)${CL} last_two_octets - Show last two octets (e.g., 0.100) [Default]"
   echo -e "${GN}2)${CL} last_octet - Show only last octet (e.g., 100)"
   echo -e "${GN}3)${CL} full - Show full IP address (e.g., 192.168.0.100)"
-  
+
   while true; do
     read -p "Enter your choice (1-3) [1]: " tag_choice
     case ${tag_choice:-1} in
@@ -342,16 +342,16 @@ interactive_config_setup() {
         ;;
     esac
   done
-  
+
   # LOOP_INTERVAL configuration
   echo -e "\n${YW}Set check interval (in seconds):${CL}"
   echo -e "${YW}Default: 300 seconds (5 minutes)${CL}"
   echo -e "${YW}Recommended range: 300-3600 seconds${CL}"
-  
+
   while true; do
     read -p "Enter interval in seconds [300]: " interval_input
     interval_input=${interval_input:-300}
-    
+
     if [[ $interval_input =~ ^[0-9]+$ ]] && [ $interval_input -ge 300 ] && [ $interval_input -le 7200 ]; then
       LOOP_INTERVAL=$interval_input
       echo -e "${GN}✓ Selected: ${LOOP_INTERVAL} seconds${CL}"
@@ -472,32 +472,32 @@ log_unchanged() {
 ip_in_cidr() {
     local ip="$1" cidr="$2"
     debug_log "ip_in_cidr: checking '$ip' against '$cidr'"
-    
+
     # Manual CIDR check - более надёжный метод
     debug_log "ip_in_cidr: using manual check (bypassing ipcalc)"
         local network prefix
         IFS='/' read -r network prefix <<< "$cidr"
-        
+
         # Convert IP and network to integers for comparison
         local ip_int net_int mask
         IFS='.' read -r a b c d <<< "$ip"
         ip_int=$(( (a << 24) + (b << 16) + (c << 8) + d ))
-        
+
         IFS='.' read -r a b c d <<< "$network"
         net_int=$(( (a << 24) + (b << 16) + (c << 8) + d ))
-        
+
     # Create subnet mask
         mask=$(( 0xFFFFFFFF << (32 - prefix) ))
-        
+
     # Apply mask and compare
     local ip_masked=$((ip_int & mask))
     local net_masked=$((net_int & mask))
-    
+
     debug_log "ip_in_cidr: IP=$ip ($ip_int), Network=$network ($net_int), Prefix=$prefix"
     debug_log "ip_in_cidr: Mask=$mask (hex: $(printf '0x%08x' $mask))"
     debug_log "ip_in_cidr: IP&Mask=$ip_masked ($(printf '%d.%d.%d.%d' $((ip_masked>>24&255)) $((ip_masked>>16&255)) $((ip_masked>>8&255)) $((ip_masked&255))))"
     debug_log "ip_in_cidr: Net&Mask=$net_masked ($(printf '%d.%d.%d.%d' $((net_masked>>24&255)) $((net_masked>>16&255)) $((net_masked>>8&255)) $((net_masked&255))))"
-    
+
     if (( ip_masked == net_masked )); then
         debug_log "ip_in_cidr: manual check PASSED - IP is in CIDR"
         return 0
@@ -526,7 +526,7 @@ ip_in_cidrs() {
     [[ -z "$cidrs" ]] && return 1
     local IFS=' '
     debug_log "Checking IP '$ip' against CIDRs: '$cidrs'"
-    for cidr in $cidrs; do 
+    for cidr in $cidrs; do
         debug_log "Testing IP '$ip' against CIDR '$cidr'"
         if ip_in_cidr "$ip" "$cidr"; then
             debug_log "IP '$ip' matches CIDR '$cidr' - PASSED"
@@ -543,7 +543,7 @@ ip_in_cidrs() {
 is_valid_ipv4() {
     local ip="$1"
     [[ "$ip" =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]] || return 1
-    
+
     local IFS='.' parts
     read -ra parts <<< "$ip"
     for part in "${parts[@]}"; do
@@ -557,24 +557,24 @@ get_vm_ips() {
     local vmid=$1 ips=""
     local vm_config="/etc/pve/qemu-server/${vmid}.conf"
     [[ ! -f "$vm_config" ]] && return
-    
+
     debug_log "vm $vmid: starting IP detection"
-    
+
     # Check if VM is running first
     local vm_status=""
     if command -v qm >/dev/null 2>&1; then
         vm_status=$(qm status "$vmid" 2>/dev/null | awk '{print $2}')
     fi
-    
+
     if [[ "$vm_status" != "running" ]]; then
         debug_log "vm $vmid: not running (status: $vm_status)"
         return
     fi
-    
+
     # Get MAC addresses from config
     local mac_addresses=$(grep -E "^net[0-9]+:" "$vm_config" | grep -oE "([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}" | head -3)
     debug_log "vm $vmid: found MACs: $mac_addresses"
-    
+
     # Method 1: QM guest agent (most reliable for current IP)
     if command -v qm >/dev/null 2>&1; then
         debug_log "vm $vmid: trying qm guest agent first"
@@ -586,17 +586,17 @@ get_vm_ips() {
             fi
         done
     fi
-    
+
     # Method 2: Fresh ARP table lookup (force refresh)
     if [[ -n "$mac_addresses" ]]; then
         debug_log "vm $vmid: refreshing ARP table and checking"
         # Try to refresh ARP table by pinging network ranges
         for mac in $mac_addresses; do
             local mac_lower=$(echo "$mac" | tr '[:upper:]' '[:lower:]')
-            
+
             # First check current ARP table
             local current_ip=$(ip neighbor show | grep "$mac_lower" | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | head -1)
-            
+
             # If found in ARP, verify it's still valid by trying to ping
             if [[ -n "$current_ip" && "$current_ip" =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]]; then
                 debug_log "vm $vmid: found IP $current_ip in ARP table for MAC $mac_lower, verifying..."
@@ -612,7 +612,7 @@ get_vm_ips() {
             fi
         done
     fi
-    
+
     # Method 3: DHCP leases (backup method)
     if [[ -z "$ips" ]]; then
         debug_log "vm $vmid: checking DHCP leases as fallback"
@@ -637,11 +637,11 @@ get_vm_ips() {
             done
         done
     fi
-    
+
     # Remove duplicates and clean up
     local unique_ips=$(echo "$ips" | tr ' ' '\n' | sort -u | tr '\n' ' ')
     unique_ips="${unique_ips% }"
-    
+
     debug_log "vm $vmid: final IPs: '$unique_ips'"
     echo "$unique_ips"
 }
@@ -720,25 +720,25 @@ update_tags() {
     # Update tags if there are changes
     local old_tags_str=$(IFS=';'; echo "${current_tags[*]}")
     local new_tags_str=$(IFS=';'; echo "${next_tags[*]}")
-    
+
     debug_log "$type $vmid old_tags: '$old_tags_str'"
     debug_log "$type $vmid new_tags: '$new_tags_str'"
     debug_log "$type $vmid tags_equal: $([[ "$old_tags_str" == "$new_tags_str" ]] && echo true || echo false)"
-    
+
     if [[ "$old_tags_str" != "$new_tags_str" ]]; then
         # Determine what changed
         local old_ip_tags_count=${#current_ip_tags[@]}
         local new_ip_tags_count=${#formatted_ips[@]}
-        
+
         # Build detailed change message
         local change_details=""
-        
+
         if [[ $old_ip_tags_count -eq 0 ]]; then
             change_details="added ${new_ip_tags_count} IP tag(s): [${GREEN}${formatted_ips[*]}${NC}]"
         else
             # Compare old and new IP tags
             local added_tags=() removed_tags=() common_tags=()
-            
+
             # Find removed tags
             for old_tag in "${current_ip_tags[@]}"; do
                 local found=false
@@ -754,7 +754,7 @@ update_tags() {
                     common_tags+=("$old_tag")
                 fi
             done
-            
+
             # Find added tags
             for new_tag in "${formatted_ips[@]}"; do
                 local found=false
@@ -768,7 +768,7 @@ update_tags() {
                     added_tags+=("$new_tag")
                 fi
             done
-            
+
             # Build change message
             local change_parts=()
             if [[ ${#added_tags[@]} -gt 0 ]]; then
@@ -780,12 +780,12 @@ update_tags() {
             if [[ ${#common_tags[@]} -gt 0 ]]; then
                 change_parts+=("kept [${GRAY}${common_tags[*]}${NC}]")
             fi
-            
+
             change_details=$(IFS=', '; echo "${change_parts[*]}")
         fi
-        
+
         log_change "${type^^} ${CYAN}${vmid}${NC}: ${change_details}"
-        
+
         if [[ "$type" == "lxc" ]]; then
             pct set "${vmid}" -tags "$(IFS=';'; echo "${next_tags[*]}")" &>/dev/null
         else
@@ -801,7 +801,7 @@ update_tags() {
         # Tags unchanged
         local ip_count=${#formatted_ips[@]}
         local status_msg=""
-        
+
         if [[ $ip_count -eq 0 ]]; then
             status_msg="No IPs detected"
         elif [[ $ip_count -eq 1 ]]; then
@@ -809,7 +809,7 @@ update_tags() {
         else
             status_msg="${ip_count} IP tags [${GRAY}${formatted_ips[*]}${NC}] unchanged"
         fi
-        
+
         log_unchanged "${type^^} ${GRAY}${vmid}${NC}: ${status_msg}"
     fi
 }
@@ -817,29 +817,29 @@ update_tags() {
 # Update all instances of specified type
 update_all_tags() {
     local type="$1" vmids count=0
-    
+
     if [[ "$type" == "lxc" ]]; then
         vmids=($(pct list 2>/dev/null | grep -v VMID | awk '{print $1}'))
     else
         local all_vm_configs=($(ls /etc/pve/qemu-server/*.conf 2>/dev/null | sed 's/.*\/\([0-9]*\)\.conf/\1/' | sort -n))
         vmids=("${all_vm_configs[@]}")
     fi
-    
+
     count=${#vmids[@]}
     [[ $count -eq 0 ]] && return
-    
+
     # Display processing header with color
     if [[ "$type" == "lxc" ]]; then
         log_info "Processing ${WHITE}${count}${NC} LXC container(s) sequentially"
     else
         log_info "Processing ${WHITE}${count}${NC} virtual machine(s) sequentially"
     fi
-    
+
     # Process each VM/LXC container sequentially
     for vmid in "${vmids[@]}"; do
         update_tags "$type" "$vmid"
     done
-    
+
     # Add completion message
     if [[ "$type" == "lxc" ]]; then
         log_success "Completed processing LXC containers"
@@ -865,14 +865,14 @@ check_status_changed() {
 # Main check function
 check() {
     local current_time=$(date +%s)
-    
+
     # Simple periodic check - always update both LXC and VM every loop
     log_info "Starting periodic check"
-    
+
     # Update LXC containers
     update_all_tags "lxc"
-    
-    # Update VMs  
+
+    # Update VMs
     update_all_tags "vm"
 }
 
@@ -905,18 +905,18 @@ main() {
 # Simple LXC IP detection
 get_lxc_ips() {
     local vmid=$1
-    
+
     debug_log "lxc $vmid: starting IP detection"
-    
+
     # Check if LXC is running
     local lxc_status=$(pct status "${vmid}" 2>/dev/null | awk '{print $2}')
     if [[ "$lxc_status" != "running" ]]; then
         debug_log "lxc $vmid: not running (status: $lxc_status)"
         return
     fi
-    
+
     local ips=""
-    
+
     # Method 1: Check Proxmox config for static IP
     local pve_lxc_config="/etc/pve/lxc/${vmid}.conf"
     if [[ -f "$pve_lxc_config" ]]; then
@@ -926,7 +926,7 @@ get_lxc_ips() {
             ips="$static_ip"
         fi
     fi
-    
+
     # Method 2: ARP table lookup if no static IP
     if [[ -z "$ips" && -f "$pve_lxc_config" ]]; then
         local mac_addr=$(grep -Eo 'hwaddr=([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}' "$pve_lxc_config" | head -1 | cut -d'=' -f2)
@@ -939,7 +939,7 @@ get_lxc_ips() {
             fi
         fi
     fi
-    
+
     # Method 3: Direct container command if ARP failed
     if [[ -z "$ips" ]]; then
         local container_ip=$(timeout 5s pct exec "$vmid" -- ip -4 addr show 2>/dev/null | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -v '127.0.0.1' | head -1)
@@ -948,7 +948,7 @@ get_lxc_ips() {
             ips="$container_ip"
         fi
     fi
-    
+
     debug_log "lxc $vmid: final IPs: '$ips'"
     echo "$ips"
 }
@@ -1083,21 +1083,21 @@ exec "$SCRIPT_FILE"
 EOF
   chmod +x /usr/local/bin/iptag-run
   msg_ok "Created iptag-run command"
-  
+
   echo -e "\n${GN}${APP} service installation completed successfully! ${CL}"
   echo -e "${YW}The service is now running automatically.${CL}"
   echo -e "${YW}You can also run it manually with: ${GN}iptag-run${CL}\n"
-  
+
   # Show configuration information
   show_post_install_info
-  
+
 elif [[ "$INSTALL_MODE" == "command" ]]; then
   # Command-only installation
   install_command_only
-  
+
   stop_spinner
   echo -e "\n${GN}${APP} command installation completed successfully! ${CL}"
-  
+
   # Show configuration information
   show_post_install_info
 fi

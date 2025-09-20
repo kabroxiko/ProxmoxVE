@@ -1,4 +1,3 @@
-
 name: Delete JSON date PR  Branch
 
 on:
@@ -9,7 +8,7 @@ on:
 
 jobs:
   delete_branch:
-    if: github.repository == 'community-scripts/ProxmoxVE'
+    if: github.repository == 'kabroxiko/ProxmoxVE'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the code

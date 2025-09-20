@@ -10,7 +10,7 @@ on:
 
 jobs:
   update-app-files:
-    if: github.repository == 'community-scripts/ProxmoxVE'
+    if: github.repository == 'kabroxiko/ProxmoxVE'
     runs-on: ubuntu-latest
 
     permissions:
@@ -95,7 +95,7 @@ jobs:
       - name: Check if there are any changes
         run: |
           echo "Checking for changes..."
-          git add -A  
+          git add -A
           git status
           if git diff --cached --quiet; then
             echo "No changes detected."

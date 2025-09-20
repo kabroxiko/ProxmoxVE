@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2025 community-scripts ORG
+# Copyright (c) 2021-2025 kabroxiko ORG
 # Author: MickLesk (CanbiZ)
-# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/kabroxiko/ProxmoxVE/raw/main/LICENSE
 # Source: https://github.com/booklore-app/BookLore
 
 source /dev/stdin <<<"$FUNCTIONS_FILE_PATH"
@@ -51,7 +51,7 @@ cat <<EOF >/opt/booklore_storage/.env
 DATABASE_URL=jdbc:mariadb://localhost:3306/$DB_NAME
 DATABASE_USERNAME=$DB_USER
 DATABASE_PASSWORD=$DB_PASS
-BOOKLORE_PORT=6060 
+BOOKLORE_PORT=6060
 
 BOOKLORE_DATA_PATH=/opt/booklore_storage/data
 BOOKLORE_BOOKS_PATH=/opt/booklore_storage/books

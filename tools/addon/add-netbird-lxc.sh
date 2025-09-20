@@ -4,16 +4,16 @@
 # Author: tteck (tteckster)
 # Co-Author: MickLesk (Canbiz)
 # License: MIT
-# https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# https://github.com/kabroxiko/ProxmoxVE/raw/main/LICENSE
 
 function header_info {
   clear
   cat <<"EOF"
     _   __     __  ____  _          __
    / | / /__  / /_/ __ )(_)________/ /
-  /  |/ / _ \/ __/ __  / / ___/ __  / 
- / /|  /  __/ /_/ /_/ / / /  / /_/ / 
-/_/ |_/\___/\__/_____/_/_/   \__,_/  
+  /  |/ / _ \/ __/ __  / / ___/ __  /
+ / /|  /  __/ /_/ /_/ / / /  / /_/ /
+/_/ |_/\___/\__/_____/_/_/   \__,_/
 
 EOF
 }

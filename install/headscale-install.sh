@@ -2,7 +2,7 @@
 
 # Copyright (c) 2021-2025 tteck
 # Author: tteck (tteckster)
-# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
+# License: MIT | https://github.com/kabroxiko/ProxmoxVE/raw/main/LICENSE
 # Source: https://github.com/juanfont/headscale
 
 source /dev/stdin <<<"$FUNCTIONS_FILE_PATH"
@@ -18,7 +18,7 @@ fetch_and_deploy_gh_release "headscale" "juanfont/headscale" "binary"
 read -r -p "${TAB3}Would you like to add headscale-admin UI? <y/N> " prompt
 if [[ ${prompt,,} =~ ^(y|yes)$ ]]; then
   fetch_and_deploy_gh_release "headscale-admin" "GoodiesHQ/headscale-admin" "prebuild" "latest" "/opt/headscale-admin" "admin.zip"
-  
+
   msg_info "Configuring headscale-admin"
   $STD apt-get install -y caddy
   $STD caddy stop
