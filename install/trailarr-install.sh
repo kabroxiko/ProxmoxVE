@@ -41,7 +41,7 @@ PYTHON_VERSION="3.13" setup_uv
 msg_ok "Setup Python Environment"
 
 msg_info "Cloning Trailarr Repository"
-$STD git clone https://github.com/nandyalu/trailarr.git /opt/trailarr
+$STD git clone https://github.com/kabroxiko/trailarr.git
 cd /opt/trailarr
 msg_ok "Cloned Trailarr Repository"
 
@@ -100,7 +100,14 @@ if [ -n "$FFMPEG_URL" ]; then
 fi
 
 chown -R trailarr:trailarr /opt/trailarr/.local/bin
+
+# Symlink ffmpeg and ffprobe to /usr/local/bin for compatibility
+ln -sf /opt/trailarr/.local/bin/ffmpeg /usr/local/bin/ffmpeg
+ln -sf /opt/trailarr/.local/bin/ffprobe /usr/local/bin/ffprobe
 msg_ok "Installed Media Tools"
+
+# Symlink yt-dlp to /usr/local/bin for compatibility
+ln -sf /opt/trailarr/backend/.venv/bin/yt-dlp /usr/local/bin/yt-dlp
 
 msg_info "Creating Environment Configuration"
 cat <<EOF >/var/lib/trailarr/.env
