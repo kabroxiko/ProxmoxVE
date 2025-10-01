@@ -20,7 +20,10 @@ $STD apt-get install -y \
   git \
   python3 \
   python3-dev \
+  python3-pip \
   build-essential \
+  nodejs \
+  npm \
   sqlite3 \
   ffmpeg \
   ca-certificates \
@@ -40,7 +43,6 @@ msg_info "Setting up Python Environment"
 PYTHON_VERSION="3.13" setup_uv
 msg_ok "Setup Python Environment"
 
-
 msg_info "Cloning Trailarr Repository"
 cd /opt
 $STD git clone https://github.com/kabroxiko/trailarr.git
@@ -49,35 +51,42 @@ msg_ok "Cloned Trailarr Repository"
 
 msg_info "Building Go Backend"
 cd /opt/trailarr
-if ! command -v go >/dev/null 2>&1; then
-  $STD apt-get install -y golang
+if ! go version | grep -q 'go1.25.1'; then
+  msg_info "Installing Go 1.25.1"
+  GO_VERSION=1.25.1
+  ARCH=$(uname -m)
+  case "$ARCH" in
+    x86_64|amd64)
+      GO_ARCH=amd64
+      ;;
+    aarch64|arm64)
+      GO_ARCH=arm64
+      ;;
+    *)
+      msg_error "Unsupported architecture: $ARCH"
+      exit 1
+      ;;
+  esac
+  wget -q https://go.dev/dl/go${GO_VERSION}.linux-${GO_ARCH}.tar.gz -O /tmp/go${GO_VERSION}.tar.gz
+  rm -rf /usr/local/go && tar -C /usr/local -xzf /tmp/go${GO_VERSION}.tar.gz
+  export PATH=/usr/local/go/bin:$PATH
+  rm /tmp/go${GO_VERSION}.tar.gz
+  msg_ok "Installed Go 1.25.1"
 fi
 export GOPATH=/opt/trailarr/.gopath
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+export PATH=/usr/local/go/bin:$GOPATH/bin:$PATH
 cd /opt/trailarr
 make build
 msg_ok "Built Go Backend"
 
 msg_info "Building React Frontend"
-if ! command -v npm >/dev/null 2>&1; then
-  $STD apt-get install -y nodejs npm
-fi
 cd /opt/trailarr/web
 npm install
 npm run build
 msg_ok "Built React Frontend"
 
-msg_info "Setting up Directories"
-mkdir -p /var/lib/trailarr/{logs,backups,web/images,tmp}
-mkdir -p /var/log/trailarr
-mkdir -p /opt/trailarr/.local/bin
-chmod 755 /opt/trailarr /var/lib/trailarr /var/log/trailarr
-chmod -R 755 /var/lib/trailarr/*
-msg_ok "Setup Directories"
-
 msg_info "Installing Media Tools"
 # Install ffmpeg to local bin directory
-mkdir -p /opt/trailarr/.local/bin
 ARCH=$(dpkg --print-architecture 2>/dev/null || uname -m)
 case "$ARCH" in
   amd64|x86_64)
@@ -87,74 +96,36 @@ case "$ARCH" in
     FFMPEG_URL="https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-arm64-static.tar.xz"
     ;;
   *)
-    # Fallback to system ffmpeg for unsupported architectures
-    if command -v ffmpeg >/dev/null 2>&1; then
-      $STD cp "$(which ffmpeg)" "/opt/trailarr/.local/bin/"
-      $STD cp "$(which ffprobe)" "/opt/trailarr/.local/bin/"
-    fi
     ;;
 esac
 
 if [ -n "$FFMPEG_URL" ]; then
   cd /tmp
-  $STD curl -L -o ffmpeg.tar.xz "$FFMPEG_URL"
-  $STD mkdir -p ffmpeg_extract
-  $STD tar -xf ffmpeg.tar.xz -C ffmpeg_extract --strip-components=1
-  $STD cp ffmpeg_extract/ffmpeg ffmpeg_extract/ffprobe "/opt/trailarr/.local/bin/"
-  $STD rm -rf ffmpeg.tar.xz ffmpeg_extract
+  $STD wget -O - "$FFMPEG_URL" | tar -xJ -C /usr/local/bin --strip-components=1 --wildcards '*/ffmpeg' '*/ffprobe'
+  $STD chmod +x /usr/local/bin/ffmpeg /usr/local/bin/ffprobe
 fi
-
-
-
-# Symlink ffmpeg and ffprobe to /usr/local/bin for compatibility
-ln -sf /opt/trailarr/.local/bin/ffmpeg /usr/local/bin/ffmpeg
-ln -sf /opt/trailarr/.local/bin/ffprobe /usr/local/bin/ffprobe
-msg_ok "Installed Media Tools"
-
 
 # Install yt-dlp globally for compatibility
 if ! command -v yt-dlp >/dev/null 2>&1; then
-  pip3 install --no-cache-dir yt-dlp
+  pip3 install --no-cache-dir yt-dlp curl_cffi
 fi
-ln -sf $(which yt-dlp) /usr/local/bin/yt-dlp
-
-msg_info "Creating Environment Configuration"
-msg_ok "Created Environment Configuration"
+msg_ok "Installed Media Tools"
 
 msg_info "Creating Service"
 cat <<EOF >/etc/systemd/system/trailarr.service
 [Unit]
-Description=Trailarr - Trailer downloader for Radarr and Sonarr
-Documentation=https://github.com/kabroxiko/trailarr
-After=network.target
-
-
+Description=Trailarr Daemon
+After=syslog.target network.target
 [Service]
 Type=simple
-User=root
-Group=root
-WorkingDirectory=/app
-ExecStart=/app/bin/trailarr
-Restart=always
-RestartSec=60
-TimeoutStopSec=30
-
-# Security settings
-NoNewPrivileges=true
-PrivateTmp=true
-ProtectSystem=full
-ReadWritePaths=/var/lib/trailarr /var/log/trailarr /opt/trailarr
-ProtectKernelTunables=true
-ProtectKernelModules=true
-ProtectControlGroups=true
-
+WorkingDirectory=/opt/trailarr
+ExecStart=/opt/trailarr/bin/trailarr
+TimeoutStopSec=20
+KillMode=process
+Restart=on-failure
 [Install]
 WantedBy=multi-user.target
 EOF
-
-# Make sure the scripts are executable
-chmod +x /opt/trailarr/scripts/baremetal/*.sh
-
 systemctl enable -q --now trailarr
 msg_ok "Created Service"
 
