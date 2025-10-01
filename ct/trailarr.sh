@@ -3,7 +3,7 @@ source <(curl -fsSL https://raw.githubusercontent.com/kabroxiko/ProxmoxVE/main/m
 # Copyright (c) 2021-2025 tteck
 # Author: tteck (tteckster)
 # License: MIT | https://github.com/kabroxiko/ProxmoxVE/raw/main/LICENSE
-# Source: https://github.com/nandyalu/trailarr
+# Source: https://github.com/kabroxiko/trailarr
 
 APP="Trailarr"
 var_tags="${var_tags:-arr}"
@@ -61,4 +61,4 @@ description
 msg_ok "Completed Successfully!\n"
 echo -e "${CREATING}${GN}${APP} setup has been successfully initialized!${CL}"
 echo -e "${INFO}${YW} Access it using the following URL:${CL}"
-echo -e "${TAB}${GATEWAY}${BGN}http://${IP}:7889${CL}"
+echo -e "${TAB}${GATEWAY}${BGN}http://${IP}:8080${CL}"
